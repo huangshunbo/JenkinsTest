@@ -12,7 +12,9 @@ boolean isInJeknins() {
         str = ""
         Iterator it = map.iterator();
         while (it.hasNext()) {
-            str += it.next();
+            Map.Entry entry = it.next();
+            str += entry;
+            println "key = " + entry.key + " value = " + entry.value
         }
         if (str.contains("jenkins")) {
             return true
@@ -20,7 +22,7 @@ boolean isInJeknins() {
             return false;
         }
     }
-    return false
+    return true
 }
 
 def getJenkinsBuild() {
