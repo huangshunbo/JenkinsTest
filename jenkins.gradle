@@ -44,10 +44,11 @@ task hello {
 
         File apkFiles = new File("/var/lib/jenkins/jobs/JenkinsTest/builds/" + buildNumber + "/archive/app/build/outputs/apk");
         println "OUT_PUT" + apkFiles.getAbsolutePath()
-        println "FILES : " + apkFiles.listFiles().toArrayString()
-        println "FILES : " + apkFiles.list().toArrayString()
-        for(File file : apkFiles.listFiles()){
-            println file.getName()
+        println "OUT_PUT" + apkFiles.isDirectory()
+        if (apkFiles.isDirectory()) {
+            apkFiles.eachFileRecurse { File file ->
+                println file.getName()
+            }
         }
     }
 
