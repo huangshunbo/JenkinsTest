@@ -38,9 +38,9 @@ task hello {
     if(isInJeknins()){
         ext.env = System.getenv()
         println 'BUILD_NUMBER : ' + env.BUILD_NUMBER?.toInteger()
-        println 'BRANCH_NAME : ' + env.BRANCH_NAME?.toInteger()
-        println 'JOB_NAME : ' + env.JOB_NAME?.toInteger()
-        println 'BUILD_URL : ' + env.BUILD_URL?.toInteger()
+        println 'BRANCH_NAME : ' + env.BRANCH_NAME?.toString()
+        println 'JOB_NAME : ' + env.JOB_NAME?.toString()
+        println 'BUILD_URL : ' + env.BUILD_URL?.toString()
     }
 
 }
