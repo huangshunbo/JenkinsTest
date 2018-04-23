@@ -36,8 +36,6 @@ android {
     //修改生成的apk名字
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            def oldFile = output.outputFile
-            def newName = '';
             def outputFile = output.outputFile
             // APK输出文件名规则：aiyou-版本名-release.apk
             def releaseApkName = 'JenkinsTest-' + rootProject.ext.android.versionName + '-' + variant.buildType.name + '.apk'
