@@ -13,10 +13,8 @@ android {
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.releaseSign
             jniDebuggable false
             debuggable false
-            shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -27,14 +25,11 @@ android {
             debuggable true
         }
         debug {
-            signingConfig signingConfigs.defaultSign
             jniDebuggable true
             debuggable true
-            shrinkResources false
-            minifyEnabled localProperties(name: 'DebugMinifyEnabled', default: false).toBoolean()
+            minifyEnabled false
             //需要修改这个值时，在local.properties配置，如：DebugMinifyEnabled=false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
         }
         develop {
             initWith debug
