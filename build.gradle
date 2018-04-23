@@ -25,18 +25,5 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-def getJenkinsBuildCode() {
-        ext.env = System.getenv()
-        ext.buildNumber = env.BUILD_NUMBER?.toInteger()
-        return "$buildNumber"
-}
 
-task saveInfo(){
-    doLast{
-        println("saveInfo")
-    }
-}
-task hello {
-    println 'Hello, world!'
-    println getJenkinsBuildCode()
-}
+apply from:'jenkins.gradle'
