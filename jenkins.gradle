@@ -1,0 +1,46 @@
+boolean isInJeknins() {
+    Map<String, String> map = System.getenv()
+
+    if (map == null) {
+        return false
+    }
+    String str = map.get("Path")
+    if (str != null) {
+        //it's windows
+        return false;
+    } else {
+        str = ""
+        Iterator it = map.iterator();
+        while (it.hasNext()) {
+            str += it.next();
+        }
+        if (str.contains("jenkins")) {
+            return true
+        } else {
+            return false;
+        }
+    }
+    return false
+}
+
+def getJenkinsBuild() {
+    boolean  flag = isInJeknins();
+    if(flag){
+        ext.env = System.getenv()
+        ext.buildNumber = env.BUILD_NUMBER?.toInteger()
+        return "$buildNumber"
+    }else{
+        return 0
+    }
+}
+
+task hello {
+    if(isInJeknins()){
+        ext.env = System.getenv()
+        println 'BUILD_NUMBER : ' + env.BUILD_NUMBER?.toInteger()
+        println 'BRANCH_NAME : ' + env.BRANCH_NAME?.toInteger()
+        println 'JOB_NAME : ' + env.JOB_NAME?.toInteger()
+        println 'BUILD_URL : ' + env.BUILD_URL?.toInteger()
+    }
+
+}
