@@ -43,6 +43,7 @@ task hello {
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
         println "OUT_PUT" + projectDir.getName()
+        println "OUT_PUT" + buildDir.getName()
 
         File apkFiles = new File(env.BUILD_URL?.toString() + "artifact/app/build/outputs/apk/");
         for(File file : apkFiles.listFiles()){
