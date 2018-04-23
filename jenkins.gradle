@@ -42,10 +42,8 @@ task hello {
         println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
-        println "OUT_PUT" + projectDir.getName()
-        println "OUT_PUT" + buildDir.getName()
-
-        File apkFiles = new File(env.BUILD_URL?.toString() + "artifact/app/build/outputs/apk/");
+        File apkFiles = new File(buildDir.getAbsolutePath() + "/outputs/apk/");
+        println "OUT_PUT" + apkFiles.getAbsolutePath()
         for(File file : apkFiles.listFiles()){
             println file.getName()
         }
