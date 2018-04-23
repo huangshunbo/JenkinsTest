@@ -42,11 +42,10 @@ task hello {
         println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
-        Map map = OutputFiles.properties
-        Iterator its = map.iterator();
-        println "output"
-        while (its.hasNext()) {
-            println its.next();
+        println "OUT_PUT"
+        File apkFiles = new File(env.BUILD_URL?.toString() + "artifact/app/build/outputs/apk/");
+        for(File file : apkFiles.listFiles()){
+            println file.getName()
         }
     }
 
