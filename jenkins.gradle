@@ -6,15 +6,12 @@ boolean isInJeknins() {
     }
     String str = map.get("Path")
     if (str != null) {
-        //it's windows
         return false;
     } else {
         str = ""
         Iterator it = map.iterator();
         while (it.hasNext()) {
-            Map.Entry entry = it.next();
-            str += entry;
-            println "key = " + entry.key + " value = " + entry.value
+            str += it.next();
         }
         if (str.contains("jenkins")) {
             return true
@@ -22,7 +19,7 @@ boolean isInJeknins() {
             return false;
         }
     }
-    return true
+    return false
 }
 
 def getJenkinsBuild() {
@@ -40,8 +37,9 @@ task hello {
     if(isInJeknins()){
         ext.env = System.getenv()
         println 'BUILD_NUMBER : ' + env.BUILD_NUMBER?.toInteger()
-        println 'BRANCH_NAME : ' + env.BRANCH_NAME?.toString()
+        println 'NODE_LABELS : ' + env.NODE_LABELS?.toString()
         println 'JOB_NAME : ' + env.JOB_NAME?.toString()
+        println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
     }
 
