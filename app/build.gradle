@@ -13,27 +13,8 @@ android {
     }
     buildTypes {
         release {
-            jniDebuggable false
-            debuggable false
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        //正式环境包（带日志）
-        alpha {
-            initWith release
-            jniDebuggable true
-            debuggable true
-        }
-        debug {
-            jniDebuggable true
-            debuggable true
             minifyEnabled false
-            //需要修改这个值时，在local.properties配置，如：DebugMinifyEnabled=false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        develop {
-            initWith debug
-            minifyEnabled false
         }
     }
 
