@@ -58,11 +58,25 @@ task hello {
     }
 }
 
-afterEvaluate {
-    println 'afterEvaluate'
-}
-task test1 {
-    doLast{
-        println 'text1'
+//修改生成的apk名字
+android.applicationVariants.all { variant ->
+    if(isInJeknins()) {
+        ext.env = System.getenv()
+        def buildNumber = env.BUILD_NUMBER?.toInteger()
+        def nodeLabel = env.NODE_LABELS?.toString()
+        def jobName = env.JOB_NAME?.toString()
+        def buildType = env.BUILD_TYPE?.toString()
+        def buildUrl = env.BUILD_URL?.toString()
+        def list = []
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            // APK输出文件名规则：aiyou-版本名-release.apk
+            def apkName = 'JenkinsTest-' + rootProject.ext.android.versionName + '-' + variant.buildType.name + '.apk'
+            // appReleaseDir对应local.properties里面定义的路径，再加上日期（格式：201503011230）文件夹
+            output.outputFile = new File(outputFile.parent, apkName)
+            list.add(buildUrl+'archive/app/build/outputs/apk/'+apkName)
+        }
+        println list.toListString()
     }
+
 }

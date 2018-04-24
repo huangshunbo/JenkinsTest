@@ -21,16 +21,7 @@ android {
     lintOptions {
         abortOnError false
     }
-    //修改生成的apk名字
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            // APK输出文件名规则：aiyou-版本名-release.apk
-            def releaseApkName = 'JenkinsTest-' + rootProject.ext.android.versionName + '-' + variant.buildType.name + '.apk'
-            // appReleaseDir对应local.properties里面定义的路径，再加上日期（格式：201503011230）文件夹
-            output.outputFile = new File(outputFile.parent, releaseApkName)
-        }
-    }
+
 
 }
 
