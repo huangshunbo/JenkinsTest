@@ -28,10 +28,8 @@ android {
             // APK输出文件名规则：aiyou-版本名-release.apk
             def apkName = 'JenkinsTest-' + rootProject.ext.android.versionName + '-' + variant.buildType.name + '.apk'
             output.outputFile = new File(outputFile.parent, apkName)
-            rootProject.ext.urls.add(apkName)
         }
         println 'applicationVariants'
-        println rootProject.ext.urls.toListString()
     }
 
 }
