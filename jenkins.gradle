@@ -57,8 +57,7 @@ task hello {
         }
     }
 }
-hello.dependsOn build
-
+hello.mustRunAfter tasks.last()
 //修改生成的apk名字
 //android.applicationVariants.all { variant ->
 //    if(isInJeknins()) {
