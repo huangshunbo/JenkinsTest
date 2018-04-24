@@ -47,21 +47,17 @@ task hello {
         def path = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
         File dingding = new File('./dingding.json')
 
-        FileTree files = fileTree(path);
-        println files.dir.isDirectory()
-
-        files = fileTree('.')
-        println files.dir.isDirectory()
-
-        files = fileTree('../..')
-        println files.dir.isDirectory()
-
         files = fileTree('../../jobs')
+        println files.dir.isDirectory()
+
+        files = fileTree('../../jobs/JenkinsTest/builds')
+        println files.dir.isDirectory()
+
+        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
         println files.dir.isDirectory()
 
         files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk');
         println files.dir.toString()
-        println files.dir.isDirectory()
         files.each{File file ->
             println file.getName()
         }
