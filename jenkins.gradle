@@ -1,3 +1,5 @@
+import sun.management.FileSystem
+
 boolean isInJeknins() {
     Map<String, String> map = System.getenv()
 
@@ -48,6 +50,7 @@ task hello {
         files.each{File file ->
             println file.getName()
         }
+        println files.combinations().get(10)
     }
 
 }
