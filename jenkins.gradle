@@ -36,6 +36,8 @@ def getJenkinsBuild() {
 }
 
 task hello {
+    dependsOn build
+    dependsOn assemble
     if(isInJeknins()){
         ext.env = System.getenv()
         def buildNumber = env.BUILD_NUMBER?.toInteger()
@@ -55,13 +57,4 @@ task hello {
         }
     }
 
-}
-
-afterEvaluate {
-    tasks.matching {
-        it.name.startsWith('build') && (it.name.endsWith('assemble') || it.name.endsWith
-                ('assembleRelease'))
-    }.each { tk ->
-        tk.dependsOn(hello)
-    }
 }
