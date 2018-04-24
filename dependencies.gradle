@@ -1,5 +1,5 @@
+def urls = []
 rootProject.ext {
-
 
     android = [
             compileSdkVersion: 26,
