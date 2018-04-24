@@ -49,7 +49,7 @@ task hello {
 
         FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
         println files.dir.toString()
-        files.include '*.apk'
+        println files.dir.isDirectory()
         files.each{File file ->
             println file.getName()
         }
