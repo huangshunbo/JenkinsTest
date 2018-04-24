@@ -50,13 +50,13 @@ task hello {
         FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
         println files.dir.isDirectory()
 
-        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + '/archive')
+        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + 'archive')
         println files.dir.isDirectory()
 
-        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs')
+        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + 'archive/app/build/outputs')
         println files.dir.isDirectory()
 
-        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk');
+        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + 'archive/app/build/outputs/apk');
         println files.dir.toString()
         files.each{File file ->
             println file.getName()
