@@ -36,7 +36,6 @@ def getJenkinsBuild() {
 }
 
 task hello {
-    dependsOn build
     doLast {
         if(isInJeknins()){
             ext.env = System.getenv()
@@ -61,4 +60,9 @@ task hello {
 
 afterEvaluate {
     println 'afterEvaluate'
+}
+task test1 {
+    doLast{
+        println 'text1'
+    }
 }
