@@ -36,25 +36,27 @@ def getJenkinsBuild() {
 }
 
 task hello {
-    if(isInJeknins()){
-        ext.env = System.getenv()
-        def buildNumber = env.BUILD_NUMBER?.toInteger()
-        println 'NODE_LABELS : ' + env.NODE_LABELS?.toString()
-        println 'JOB_NAME : ' + env.JOB_NAME?.toString()
-        println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
-        println 'BUILD_URL : ' + env.BUILD_URL?.toString()
+    dependsOn build
+    doLast {
+        if(isInJeknins()){
+            ext.env = System.getenv()
+            def buildNumber = env.BUILD_NUMBER?.toInteger()
+            println 'NODE_LABELS : ' + env.NODE_LABELS?.toString()
+            println 'JOB_NAME : ' + env.JOB_NAME?.toString()
+            println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
+            println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
-        def path = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
-        File dingding = new File('./dingding.json')
+            def path = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
+            File dingding = new File('./dingding.json')
 
-        FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
-        println files.dir.toString()
-        println files.dir.isDirectory()
-        files.each{File file ->
-            println file.getName()
+            FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
+            println files.dir.toString()
+            println files.dir.isDirectory()
+            files.each{File file ->
+                println file.getName()
+            }
         }
     }
-
 }
 
 afterEvaluate {
