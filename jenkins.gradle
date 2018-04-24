@@ -43,8 +43,10 @@ task hello {
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
         def path = "/var/lib/jenkins/jobs/JenkinsTest/builds/" + buildNumber + "/archive/app/build/outputs/apk/";
-        FileTree files = fileTree(path);
-        files.include '*.apk'
+        FileTree files = fileTree('.');
+        println files.dir.toString()
+        File f = new File('.')
+        println f.toString()
         files.each{File file ->
             println file.getName()
         }
