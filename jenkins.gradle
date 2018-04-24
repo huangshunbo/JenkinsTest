@@ -48,16 +48,8 @@ task hello {
         File dingding = new File('./dingding.json')
 
         FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
-        println files.dir.isDirectory()
-
-        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + 'archive')
-        println files.dir.isDirectory()
-
-        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + 'archive/app/build/outputs')
-        println files.dir.isDirectory()
-
-        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + 'archive/app/build/outputs/apk');
         println files.dir.toString()
+        files.include '*.apk'
         files.each{File file ->
             println file.getName()
         }
