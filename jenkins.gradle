@@ -44,11 +44,24 @@ task hello {
         println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
-        def path = "/var/lib/jenkins/jobs/JenkinsTest/builds/" + buildNumber + "/archive/app/build/outputs/apk/";
+        def path = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
         File dingding = new File('./dingding.json')
-        println dingding.text
-        FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk');
+
+        FileTree files = fileTree(path);
+        println files.dir.isDirectory()
+
+        files = fileTree('.')
+        println files.dir.isDirectory()
+
+        files = fileTree('../..')
+        println files.dir.isDirectory()
+
+        files = fileTree('../../jobs')
+        println files.dir.isDirectory()
+
+        files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk');
         println files.dir.toString()
+        println files.dir.isDirectory()
         files.each{File file ->
             println file.getName()
         }
