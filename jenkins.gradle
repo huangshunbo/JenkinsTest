@@ -47,7 +47,7 @@ task hello {
         def path = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
         File dingding = new File('./dingding.json')
 
-        files = fileTree('../../jobs')
+        FileTree files = fileTree('../../jobs')
         println files.dir.isDirectory()
 
         files = fileTree('../../jobs/JenkinsTest/builds')
