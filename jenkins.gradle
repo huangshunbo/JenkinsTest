@@ -43,7 +43,9 @@ task hello {
     }
 }
 hello.dependsOn {
-    tasks.findAll
+    tasks.findAll {
+        task -> task.name.startsWith('assemble')
+    }
 }
 //task packageFiles(type: Zip) {
 //    from processTemplates.outputs
