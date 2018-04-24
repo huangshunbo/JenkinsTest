@@ -53,7 +53,6 @@ task hello {
         files.each{File file ->
             println file.getName()
         }
-        println files.combinations().get(10)
     }
 
 }
