@@ -22,7 +22,7 @@ boolean isInJeknins() {
     return false
 }
 
-task dingding << {
+task dingding {
     if (isInJeknins()) {
         ext.env = System.getenv()
         def buildNumber = env.BUILD_NUMBER?.toInteger()
