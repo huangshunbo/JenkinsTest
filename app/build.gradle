@@ -17,10 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-//    lintOptions {
-//        abortOnError false
-//    }
+    lintOptions {
+        abortOnError false
+    }
     //修改生成的apk名字
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
