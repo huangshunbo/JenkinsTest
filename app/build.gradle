@@ -18,9 +18,9 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
-    }
+//    lintOptions {
+//        abortOnError false
+//    }
     //修改生成的apk名字
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
