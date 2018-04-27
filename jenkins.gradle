@@ -43,3 +43,8 @@ task savepushinfo {
     }
 }
 
+savepushinfo.dependsOn {
+    tasks.findAll {
+        task -> task.name.contains('app')
+    }
+}
