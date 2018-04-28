@@ -45,6 +45,6 @@ task savepushinfo << {
 
 savepushinfo.dependsOn {
     tasks.findAll {
-        task -> true
+        task -> task.name.contains("build")
     }
 }
