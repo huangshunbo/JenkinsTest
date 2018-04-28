@@ -26,20 +26,19 @@ task savepushinfo << {
     if (isInJeknins()) {
         ext.env = System.getenv()
         def buildNumber = env.BUILD_NUMBER?.toInteger()
-        println 'NODE_LABELS : ' + env.NODE_LABELS?.toString()
-        println 'JOB_NAME : ' + env.JOB_NAME?.toString()
-        println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
-        println 'BUILD_URL : ' + env.BUILD_URL?.toString()
+        def nodeLabels = env.NODE_LABELS?.toString()
+        def jobName = env.JOB_NAME?.toString()
+        def buildType = env.BUILD_TYPE?.toString()
+        def buildUrl = env.BUILD_URL?.toString()
 
-        def path1 = '../../jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
-        def path2 = '../../jobs/JenkinsTest/builds/' + buildNumber
+        def urls = []
+        def path = buildUrl + "artifact/app/build/outputs/apk/"
         File dingding = new File('./dingding.json')
-
         File file1 = new File('app/build/outputs/apk')
-        println file1.absolutePath
         file1.listFiles().findAll{
-            println it.name
+            urls.add( path + it.name)
         }
+        println urls.toListString()
 
     }
 }
