@@ -44,8 +44,7 @@ task savepushinfo << {
                 " \"markdown\": {" +
                 " \"title\":\"构建信息\",\n" +
                 " \"text\":\"#### [#"+ buildNumber +"]  构建信息      <br/> " +
-                " 项目名称： " + jobName + "<br/>" +
-                " branch: " + nodeLabels + "<br/>" +
+                jobName + " branch: " + nodeLabels + "<br/>" +
                 " versionCode:" + rootProject.ext.android.versionCode + "  versionName:" + rootProject.ext.android.versionName + "\n" +
                 " >  " + urls + "<br/> \"" +
                 "     }" +
