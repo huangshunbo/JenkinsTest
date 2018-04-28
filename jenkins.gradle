@@ -31,23 +31,23 @@ task savepushinfo << {
         println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
-        def path = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
+        def path1 = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
+        def path2 = '../../jobs/JenkinsTest/builds/' + buildNumber
         File dingding = new File('./dingding.json')
 
-        FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
-        files.include("**/*.apk")
-        println files.dir.toString()
-        println files.dir.isDirectory()
-        files.each { File file ->
-            println file.getName()
+        File f1 = new File(path1)
+        println f1.isDirectory()
+        println f1.isFile()
+        f1.listFiles().findAll{
+            println it.name
         }
-        files = fileTree(path)
-        files.include("**/*.apk")
-        println files.dir.toString()
-        println files.dir.isDirectory()
-        files.each { File file ->
-            println file.getName()
+        File f2 = new File(paht2)
+        println f2.isDirectory()
+        println f2.isFile()
+        f2.listFiles().findAll{
+            println it.name
         }
+
     }
 }
 
