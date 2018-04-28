@@ -1,3 +1,40 @@
+task savepushinfo << {
+    if (isInJeknins()) {
+        ext.env = System.getenv()
+        def buildNumber = env.BUILD_NUMBER?.toInteger()
+        def nodeLabels = env.NODE_LABELS?.toString()
+        def jobName = env.JOB_NAME?.toString()
+        def buildUrl = env.BUILD_URL?.toString()
+
+        def urls = ""
+        def path = buildUrl + "artifact/app/build/outputs/apk/"
+        File dingding = new File('dingding.json')
+        File file1 = new File('app/build/outputs/apk')
+        file1.listFiles().findAll{
+            urls = urls + "[" + it.name +"(" + getSizeString(it.size()) + ")" + "](" + path + it.name+") \n"
+        }
+        def json = "{" +
+                " \"msgtype\": \"markdown\"," +
+                " \"markdown\": {" +
+                " \"title\":\"构建信息\",\n" +
+                " \"text\":\"#### [#"+ buildNumber +"]  构建信息  \n " +
+                jobName + " branch: " + nodeLabels + " \n" +
+                " versionCode:" + rootProject.ext.android.versionCode + "  versionName:" + rootProject.ext.android.versionName + "\n" +
+                " >  " + urls + "<br/> \"" +
+                "     }" +
+                " }"
+        dingding.deleteOnExit()
+        dingding.createNewFile()
+        dingding.write(json)
+
+    }
+}
+
+savepushinfo.dependsOn {
+    tasks.findAll {
+        task -> !task.name.contentEquals("savepushinfo")
+    }
+}
 boolean isInJeknins() {
     Map<String, String> map = System.getenv()
 
@@ -21,47 +58,6 @@ boolean isInJeknins() {
     }
     return false
 }
-
-task savepushinfo << {
-    if (isInJeknins()) {
-        ext.env = System.getenv()
-        def buildNumber = env.BUILD_NUMBER?.toInteger()
-        def nodeLabels = env.NODE_LABELS?.toString()
-        def jobName = env.JOB_NAME?.toString()
-        def buildType = env.BUILD_TYPE?.toString()
-        def buildUrl = env.BUILD_URL?.toString()
-
-        def urls = ""
-        def path = buildUrl + "artifact/app/build/outputs/apk/"
-        File dingding = new File('dingding.json')
-        File file1 = new File('app/build/outputs/apk')
-        file1.listFiles().findAll{
-            urls = urls + "[" + it.name +"(" + getSizeString(it.size()) + ")" + "](" + path + it.name+") \n"
-        }
-
-        def json = "{" +
-                " \"msgtype\": \"markdown\"," +
-                " \"markdown\": {" +
-                " \"title\":\"构建信息\",\n" +
-                " \"text\":\"#### [#"+ buildNumber +"]  构建信息  \n " +
-                jobName + " branch: " + nodeLabels + " \n" +
-                " versionCode:" + rootProject.ext.android.versionCode + "  versionName:" + rootProject.ext.android.versionName + "\n" +
-                " >  " + urls + "<br/> \"" +
-                "     }" +
-                " }"
-        dingding.deleteOnExit()
-        dingding.createNewFile()
-        dingding.write(json)
-
-    }
-}
-
-savepushinfo.dependsOn {
-    tasks.findAll {
-        task -> !task.name.contentEquals("savepushinfo")
-    }
-}
-
 String getSizeString(long size) {
     double value = (double) size;
     if (value < 1024) {
