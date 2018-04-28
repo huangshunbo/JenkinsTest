@@ -7,7 +7,7 @@ android {
         applicationId "demo.android.com.jenkinstest"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 1
+        versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

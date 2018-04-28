@@ -46,7 +46,7 @@ task savepushinfo << {
                 " \"text\":\"#### ["+ buildNumber +"]  构建信息 \n" +
                 " 项目名称：" + jobName + "\n" +
                 " branch:" + nodeLabels + "\n" +
-                " versionCode:" + android.defaultConfig.versionCode + "versionName:" + android.defaultConfig.versionName + "version:" + version + "\n" +
+                " versionCode:" + rootProject.ext.android.versionCode + "versionName:" + rootProject.ext.android.versionName + "version:" + version + "\n" +
                 " >  " + urls + "\n \"" +
                 "     }" +
                 " }"
