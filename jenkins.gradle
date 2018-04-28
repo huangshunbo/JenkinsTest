@@ -41,7 +41,7 @@ task savepushinfo << {
         f1.listFiles().findAll{
             println it.name
         }
-        File f2 = new File(paht2)
+        File f2 = new File(path2)
         println f2.isDirectory()
         println f2.isFile()
         f2.listFiles().findAll{
