@@ -41,7 +41,7 @@ task savepushinfo << {
         files.each { File file ->
             println file.getName()
         }
-        files = freeTree(path)
+        files = fileTree(path)
         files.include("**/*.apk")
         println files.dir.toString()
         println files.dir.isDirectory()
