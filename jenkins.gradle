@@ -31,14 +31,26 @@ task savepushinfo << {
         def buildType = env.BUILD_TYPE?.toString()
         def buildUrl = env.BUILD_URL?.toString()
 
-        def urls = []
+        def urls = ""
         def path = buildUrl + "artifact/app/build/outputs/apk/"
         File dingding = new File('./dingding.json')
         File file1 = new File('app/build/outputs/apk')
         file1.listFiles().findAll{
-            urls.add( path + it.name)
+            urls = urls + "[" + it.name + "](" + path + it.name+")"
         }
-        println urls.toListString()
+        def json = "{" +
+                " \"msgtype\": \"markdown\"," +
+                " \"markdown\": {" +
+                " \"title\":\"构建信息\",\n" +
+                " \"text\":\"#### ["+ buildNumber +"]  构建信息 \n" +
+                " 项目名称：" + jobName + "\n" +
+                " > 下载地址： \n" +
+                " >  " + urls + "\n" +
+                "     }" +
+                " }"
+        dingding.deleteOnExit()
+        dingding.createNewFile()
+        dingding.write(json)
 
     }
 }
