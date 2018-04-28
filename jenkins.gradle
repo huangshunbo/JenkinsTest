@@ -35,7 +35,7 @@ task savepushinfo << {
         def path2 = '../../jobs/JenkinsTest/builds/' + buildNumber
         File dingding = new File('./dingding.json')
 
-        File file1 = new File('./app/build/outputs/apk')
+        File file1 = new File('app/build/outputs/apk')
         println file1.absolutePath
         file1.listFiles().findAll{
             println it.name
