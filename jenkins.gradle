@@ -35,6 +35,14 @@ task savepushinfo << {
         File dingding = new File('./dingding.json')
 
         FileTree files = fileTree('../../jobs/JenkinsTest/builds/' + buildNumber)
+        files.include("**/*.apk")
+        println files.dir.toString()
+        println files.dir.isDirectory()
+        files.each { File file ->
+            println file.getName()
+        }
+        files = freeTree(path)
+        files.include("**/*.apk")
         println files.dir.toString()
         println files.dir.isDirectory()
         files.each { File file ->
