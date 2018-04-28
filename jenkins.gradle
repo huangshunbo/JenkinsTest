@@ -36,15 +36,17 @@ task savepushinfo << {
         File dingding = new File('dingding.json')
         File file1 = new File('app/build/outputs/apk')
         file1.listFiles().findAll{
-            urls = urls + "[" + it.name + "](" + path + it.name+")"
+            urls = urls + "[" + it.name +"(" + getSizeString(it.size()) + ")" + "](" + path + it.name+") \n"
         }
+
         def json = "{" +
                 " \"msgtype\": \"markdown\"," +
                 " \"markdown\": {" +
                 " \"title\":\"构建信息\",\n" +
                 " \"text\":\"#### ["+ buildNumber +"]  构建信息 \n" +
                 " 项目名称：" + jobName + "\n" +
-                " > 下载地址： \n" +
+                " branch:" + nodeLabels + "\n" +
+                " versionCode:" + android.defaultConfig.versionCode + "versionName:" + android.defaultConfig.versionName + "version:" + version + "\n" +
                 " >  " + urls + "\n \"" +
                 "     }" +
                 " }"
@@ -58,5 +60,25 @@ task savepushinfo << {
 savepushinfo.dependsOn {
     tasks.findAll {
         task -> !task.name.contentEquals("savepushinfo")
+    }
+}
+
+String getSizeString(long size) {
+    double value = (double) size;
+    if (value < 1024) {
+        return String.valueOf(value) + "B";
+    } else {
+        value = new BigDecimal(value / 1024).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+    }
+    if (value < 1024) {
+        return String.valueOf(value) + "KB";
+    } else {
+        value = new BigDecimal(value / 1024).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+    }
+    if (value < 1024) {
+        return String.valueOf(value) + "MB";
+    } else {
+        value = new BigDecimal(value / 1024).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+        return String.valueOf(value) + "GB";
     }
 }
