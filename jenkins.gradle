@@ -31,7 +31,7 @@ task savepushinfo << {
         println 'BUILD_TYPE : ' + env.BUILD_TYPE?.toString()
         println 'BUILD_URL : ' + env.BUILD_URL?.toString()
 
-        def path1 = '/var/lib/jenkins/jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
+        def path1 = '../../jobs/JenkinsTest/builds/' + buildNumber + '/archive/app/build/outputs/apk'
         def path2 = '../../jobs/JenkinsTest/builds/' + buildNumber
         File dingding = new File('./dingding.json')
 
