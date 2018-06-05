@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 if(!TextUtils.isEmpty(etValue1.getText()) && !TextUtils.isEmpty(etValue2.getText())){
                     int value3 = Integer.parseInt(etValue1.getText().toString()) + Integer.parseInt(etValue2.getText().toString());
-                    tvValue3.setText(value3);
+                    tvValue3.setText(""+value3);
                 }
             }
         });
